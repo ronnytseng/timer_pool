@@ -12,7 +12,9 @@ class Timer {
     using Ptr = std::shared_ptr<Timer>;
     Timer(std::chrono::milliseconds d, std::function<bool()> callback) : duration_(d), callback_(callback) {
     }
-    Timer &operator=(Timer &r) {
+    Timer(const Timer &t) : duration_(t.duration_), callback_(t.callback_), time_point_(t.time_point_) {
+    }
+    Timer &operator=(const Timer &r) {
         if (this != &r) {
             duration_ = r.duration_;
             callback_ = r.callback_;
